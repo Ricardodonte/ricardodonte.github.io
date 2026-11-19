@@ -157,13 +157,67 @@
       body, .theme-toggle, .indicator { transition: none; }
       .personal[open] .personal-copy { animation: none; }
     }
+  
+/* Visual layout */
+:root { --bg: #f5f5f3; --panel: #fff; --fg: #111; --subtle: #5c5c5b; --rule: #cdcdca; --tile: #e9e9e6; }
+:root[data-theme="dark"] { --bg: #111; --panel: #1a1a1a; --fg: #f5f5f3; --subtle: #c1c1bd; --rule: #4c4c49; --tile: #292929; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) { --bg: #111; --panel: #1a1a1a; --fg: #f5f5f3; --subtle: #c1c1bd; --rule: #4c4c49; --tile: #292929; }
+}
+body { background: var(--bg); color: var(--fg); font-family: 'Segoe UI',system-ui,sans-serif; }
+.about { width: min(78rem, calc(100% - 5rem)); padding-top: 1.5rem; }
+.heading { border: 0; padding: 0; }
+.heading-tools { border-color: var(--rule); margin-bottom: clamp(3rem,7vw,6.5rem); }
+.label { font-weight: 700; letter-spacing: -.02em; }
+.theme-toggle { background: transparent; color: var(--fg); border-color: var(--rule); }
+.theme-toggle:hover { color: var(--bg); background: var(--fg); }
+h1 { max-width: 12ch; font-size: clamp(4rem,9vw,8.8rem); letter-spacing: -.075em; }
+.navigation { display: flex; gap: .7rem 2rem; margin: 2.5rem 0 0; padding: 1.15rem 0; border-block: 1px solid var(--rule); }
+a { color: var(--fg); text-decoration-color: var(--rule); transition: text-decoration-color .2s ease, opacity .2s ease; }
+a:hover { text-decoration-color: currentColor; }
+.navigation a { text-decoration: none; font-size: .95rem; font-weight: 650; }
+.navigation a:hover { opacity: .55; }
+.bio { max-width: 65ch; margin: clamp(2.5rem,5vw,4.5rem) 0 0 auto; color: var(--fg); font-size: 1.12rem; }
+.formal { font-size: clamp(1.15rem,1.55vw,1.35rem); line-height: 1.8; }
+.formal::first-letter { font-weight: inherit; }
+.personal { margin-top: 2rem; }
+.personal summary { padding: 1.15rem 1.3rem; border: 1px solid var(--rule); background: var(--panel); transition: background .2s ease; }
+.personal summary:hover { background: var(--tile); }
+.personal-copy { padding: 2rem 1.3rem 0; color: var(--subtle); }
+.personal-copy p { line-height: 1.85; }
+.extra-section { border-color: var(--rule); margin-top: clamp(5rem,9vw,8rem); padding-top: clamp(2rem,4vw,3rem); grid-template-columns: minmax(12rem,1fr) minmax(0,2fr); gap: 3rem; }
+.extra-section h2 { font-size: clamp(3.5rem,6vw,5.5rem); }
+.project { background: var(--panel); border: 1px solid var(--rule); padding: clamp(1.4rem,3vw,2.2rem); transition: transform .2s ease, border-color .2s ease; }
+.project:first-child { padding-top: clamp(1.4rem,3vw,2.2rem); }
+.project + .project { margin-top: .75rem; }
+.project:hover { transform: translateY(-3px); border-color: var(--fg); }
+.project h3 { font-size: clamp(1.65rem,2.8vw,2.3rem); margin-bottom: .75rem; }
+.project p { color: var(--subtle); margin-bottom: 1rem; }
+.project a { display: inline-block; font-weight: 650; }
+.resume { background: var(--panel); border: 1px solid var(--rule); padding: clamp(1.5rem,3.5vw,3rem); }
+.resume h3 { border-top: 1px solid var(--rule); padding-top: 1.3rem; margin-top: 1.8rem; font-size: 1.65rem; }
+.resume p { color: var(--subtle); }
+.resume p:first-child { color: var(--fg); font-family: var(--serif); font-size: 1.35rem; }
+.resume strong { color: var(--fg); }
+.resume a[href$=".pdf"] { display: inline-block; color: var(--bg); background: var(--fg); padding: .75rem 1.1rem; text-decoration: none; font-weight: 650; }
+#blog > p { padding: 2rem; background: var(--tile); }
+@media (max-width: 42rem) {
+  .about { width: calc(100% - 2.25rem); padding-top: 1rem; }
+  h1 { font-size: clamp(3.35rem,13vw,5rem); overflow-wrap: anywhere; }
+  .heading-tools { margin-bottom: 3rem; }
+  .navigation { gap: .65rem 1.3rem; }
+  .bio { margin-top: 2.5rem; font-size: 1.05rem; }
+  .extra-section { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+
   </style>
 </head>
 <body>
   <main class="about" aria-labelledby="name">
     <header class="heading">
       <div class="heading-tools">
-        <p class="label">About me</p>
+        <p class="label">RICARDO ANDERSON DONTE</p>
         <button class="theme-toggle" type="button" hidden>Dark mode</button>
       </div>
       <h1 id="name"><span>Ricardo</span> <span>Anderson</span> <span>DONTE</span></h1>
