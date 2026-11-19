@@ -16,214 +16,81 @@
     }
   </script>
   <style>
-    :root {
-      color-scheme: light;
-      --paper: #fff;
-      --ink: #000;
-      --sans: 'Segoe UI', system-ui, sans-serif;
-      --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme]) {
-        color-scheme: dark;
-        --paper: #000;
-        --ink: #fff;
-      }
-    }
-
-    :root[data-theme="dark"] {
-      color-scheme: dark;
-      --paper: #000;
-      --ink: #fff;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; }
-    body {
-      min-height: 100vh;
-      margin: 0;
-      color: var(--ink);
-      background: var(--paper);
-      font: 1rem/1.72 var(--sans);
-      transition: color .2s ease, background-color .2s ease;
-    }
-
-    .about {
-      width: min(68rem, calc(100% - 5rem));
-      margin-inline: auto;
-      padding-block: clamp(2rem, 7vw, 6rem) clamp(3rem, 8vw, 7rem);
-    }
-
-    .heading { border-block-end: 1px solid var(--ink); padding-block-end: clamp(1.6rem, 4vw, 3.2rem); }
-    .heading-tools {
-      min-height: 3rem;
-      margin-block-end: clamp(1.9rem, 5vw, 4rem);
-      padding-block-end: .85rem;
-      border-block-end: 1px solid var(--ink);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .label { margin: 0; font-size: .95rem; font-weight: 650; }
-    h1 {
-      margin: 0;
-      font: 400 clamp(2.8rem, 8.7vw, 7.4rem)/.98 var(--serif);
-      letter-spacing: -.058em;
-    }
-    h1 span { display: inline-block; }
-    .theme-toggle {
-      min-height: 2.75rem;
-      padding: .42rem .85rem;
-      border: 1px solid var(--ink);
-      border-radius: 1.5rem;
-      color: var(--ink);
-      background: var(--paper);
-      font: 600 .9rem/1.2 var(--sans);
-      cursor: pointer;
-      transition: color .2s ease, background-color .2s ease;
-    }
-    .theme-toggle:hover { color: var(--paper); background: var(--ink); }
-    :where(button, summary):focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
-
-    .bio {
-      max-width: 64ch;
-      margin: clamp(1.7rem, 4vw, 3rem) 0 0 auto;
-      font-size: clamp(1.05rem, 1.5vw, 1.15rem);
-    }
-    .bio p { margin: 0; }
-    .formal::first-letter { font-weight: 700; }
-    .personal { margin-block-start: clamp(1.75rem, 4vw, 2.75rem); }
-    .personal summary {
-      min-height: 3.3rem;
-      border-block: 1px solid var(--ink);
-      padding: .75rem .35rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      list-style: none;
-      font-weight: 650;
-      cursor: pointer;
-    }
-    .personal summary::-webkit-details-marker { display: none; }
-    .personal summary:hover .summary-text { text-decoration: underline; text-underline-offset: .22em; }
-    .hide-label { display: none; }
-    .personal[open] .show-label { display: none; }
-    .personal[open] .hide-label { display: inline; }
-    .indicator {
-      flex: none;
-      display: grid;
-      place-items: center;
-      width: 1.75rem;
-      height: 1.75rem;
-      font-size: 1.45rem;
-      line-height: 1;
-      transition: transform .2s ease;
-    }
-    .personal[open] .indicator { transform: rotate(45deg); }
-    .personal-copy { padding-block-start: 1.4rem; }
-    .personal-copy p + p { margin-block-start: 1.15rem; }
-    .personal[open] .personal-copy { animation: appear .25s ease-out; }
-
-    .navigation { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; margin: 1.5rem 0 0; }
-    a { color: var(--ink); text-underline-offset: .25em; }
-    a:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
-    .extra-section { border-top: 1px solid var(--ink); margin-top: clamp(4rem, 8vw, 7rem); padding-top: 2rem; display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; }
-    .extra-section h2 { margin: 0; font: 400 clamp(2.6rem, 5vw, 4.2rem)/1 var(--serif); letter-spacing: -.05em; }
-    .extra-section p { margin: 0; }
-    .project { padding: 1.2rem 0; border-bottom: 1px solid var(--ink); }
-    .project:first-child { padding-top: 0; }
-    .project h3 { margin: 0 0 .35rem; font: 400 1.45rem/1.2 var(--serif); }
-    .project p { margin-bottom: .5rem; }
-    @media (max-width: 42rem) { .extra-section { grid-template-columns: 1fr; } }
-    .resume h3 { font: 400 1.5rem/1.2 var(--serif); margin: 1.7rem 0 .65rem; }
-    .resume p + p { margin-top: 1rem; }
-    .resume a { text-underline-offset: .25em; }
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(.35rem); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 42rem) {
-      .about { width: calc(100% - 2.25rem); }
-      .bio { margin-inline-start: 0; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      body, .theme-toggle, .indicator { transition: none; }
-      .personal[open] .personal-copy { animation: none; }
-    }
-  
-/* Visual layout */
-:root { --bg: #f5f5f3; --panel: #fff; --fg: #111; --subtle: #5c5c5b; --rule: #cdcdca; --tile: #e9e9e6; }
-:root[data-theme="dark"] { --bg: #111; --panel: #1a1a1a; --fg: #f5f5f3; --subtle: #c1c1bd; --rule: #4c4c49; --tile: #292929; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) { --bg: #111; --panel: #1a1a1a; --fg: #f5f5f3; --subtle: #c1c1bd; --rule: #4c4c49; --tile: #292929; }
+:root {
+ color-scheme:light; --paper:#fff; --ink:#000; --serif:Georgia,'Times New Roman',serif; --sans:'Segoe UI',system-ui,sans-serif;
 }
-body { background: var(--bg); color: var(--fg); font-family: 'Segoe UI',system-ui,sans-serif; }
-.about { width: min(78rem, calc(100% - 5rem)); padding-top: 1.5rem; }
-.heading { border: 0; padding: 0; }
-.heading-tools { border-color: var(--rule); margin-bottom: clamp(3rem,7vw,6.5rem); }
-.label { font-weight: 700; letter-spacing: -.02em; }
-.theme-toggle { background: transparent; color: var(--fg); border-color: var(--rule); }
-.theme-toggle:hover { color: var(--bg); background: var(--fg); }
-h1 { max-width: 12ch; font-size: clamp(4rem,9vw,8.8rem); letter-spacing: -.075em; }
-.navigation { display: flex; gap: .7rem 2rem; margin: 2.5rem 0 0; padding: 1.15rem 0; border-block: 1px solid var(--rule); }
-a { color: var(--fg); text-decoration-color: var(--rule); transition: text-decoration-color .2s ease, opacity .2s ease; }
-a:hover { text-decoration-color: currentColor; }
-.navigation a { text-decoration: none; font-size: .95rem; font-weight: 650; }
-.navigation a:hover { opacity: .55; }
-.bio { max-width: 65ch; margin: clamp(2.5rem,5vw,4.5rem) 0 0 auto; color: var(--fg); font-size: 1.12rem; }
-.formal { font-size: clamp(1.15rem,1.55vw,1.35rem); line-height: 1.8; }
-.formal::first-letter { font-weight: inherit; }
-.personal { margin-top: 2rem; }
-.personal summary { padding: 1.15rem 1.3rem; border: 1px solid var(--rule); background: var(--panel); transition: background .2s ease; }
-.personal summary:hover { background: var(--tile); }
-.personal-copy { padding: 2rem 1.3rem 0; color: var(--subtle); }
-.personal-copy p { line-height: 1.85; }
-.extra-section { border-color: var(--rule); margin-top: clamp(5rem,9vw,8rem); padding-top: clamp(2rem,4vw,3rem); grid-template-columns: minmax(12rem,1fr) minmax(0,2fr); gap: 3rem; }
-.extra-section h2 { font-size: clamp(3.5rem,6vw,5.5rem); }
-.project { background: var(--panel); border: 1px solid var(--rule); padding: clamp(1.4rem,3vw,2.2rem); transition: transform .2s ease, border-color .2s ease; }
-.project:first-child { padding-top: clamp(1.4rem,3vw,2.2rem); }
-.project + .project { margin-top: .75rem; }
-.project:hover { transform: translateY(-3px); border-color: var(--fg); }
-.project h3 { font-size: clamp(1.65rem,2.8vw,2.3rem); margin-bottom: .75rem; }
-.project p { color: var(--subtle); margin-bottom: 1rem; }
-.project a { display: inline-block; font-weight: 650; }
-.resume { background: var(--panel); border: 1px solid var(--rule); padding: clamp(1.5rem,3.5vw,3rem); }
-.resume h3 { border-top: 1px solid var(--rule); padding-top: 1.3rem; margin-top: 1.8rem; font-size: 1.65rem; }
-.resume p { color: var(--subtle); }
-.resume p:first-child { color: var(--fg); font-family: var(--serif); font-size: 1.35rem; }
-.resume strong { color: var(--fg); }
-.resume a[href$=".pdf"] { display: inline-block; color: var(--bg); background: var(--fg); padding: .75rem 1.1rem; text-decoration: none; font-weight: 650; }
-#blog > p { padding: 2rem; background: var(--tile); }
-@media (max-width: 42rem) {
-  .about { width: calc(100% - 2.25rem); padding-top: 1rem; }
-  h1 { font-size: clamp(3.35rem,13vw,5rem); overflow-wrap: anywhere; }
-  .heading-tools { margin-bottom: 3rem; }
-  .navigation { gap: .65rem 1.3rem; }
-  .bio { margin-top: 2.5rem; font-size: 1.05rem; }
-  .extra-section { grid-template-columns: 1fr; gap: 1.5rem; }
+:root[data-theme="dark"] { color-scheme:dark; --paper:#000; --ink:#fff; }
+@media(prefers-color-scheme:dark){:root:not([data-theme]){color-scheme:dark;--paper:#000;--ink:#fff;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.75 var(--sans);transition:background .2s,color .2s}
+a{color:inherit;text-underline-offset:.25em;text-decoration-thickness:1px}
+a:hover{text-decoration-style:dotted}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid currentColor;outline-offset:5px}
+.about{width:min(72rem,calc(100% - 5rem));margin:0 auto;display:grid;grid-template-columns:15rem minmax(0,1fr);gap:5rem;align-items:start;padding:4.5rem 0}
+.heading{position:sticky;top:3rem;display:flex;flex-direction:column;min-width:0}
+.heading-tools{display:contents}
+.label{order:3;font: .85rem/1.5 var(--sans);margin:2.2rem 0 .7rem;max-width:19ch}
+h1{order:0;font:600 1.55rem/1.15 var(--sans);letter-spacing:-.055em;margin:0 0 2rem}
+h1 span{display:block}
+h1 span:nth-child(2){font-size:1rem;font-weight:400;letter-spacing:0;margin:.2rem 0}
+.navigation{order:1;display:flex;flex-direction:column;align-items:stretch;gap:.15rem;border-block:1px solid currentColor;padding:1rem 0}
+.navigation a{padding:.5rem .8rem;text-decoration:none;font-size:1rem;transition:background .18s,color .18s}
+.navigation a[aria-current="page"]{background:var(--ink);color:var(--paper)}
+.navigation a:hover{outline:1px solid currentColor;outline-offset:-1px}
+.theme-toggle{order:4;align-self:flex-start;border:1px solid var(--ink);border-radius:0;padding:.5rem .8rem;background:var(--paper);color:var(--ink);font:inherit;font-size:.85rem;cursor:pointer}
+.theme-toggle:hover{background:var(--ink);color:var(--paper)}
+.bio,.extra-section{grid-column:2;grid-row:1;max-width:100%;margin:0;padding:0;min-width:0}
+.page-panel[hidden]{display:none}
+.page-panel{animation:enter .25s ease-out}
+.bio:before{content:"About me";display:block;font:400 clamp(2.5rem,5vw,4rem)/1.1 var(--serif);letter-spacing:-.045em;margin:0 0 2.3rem}
+.formal{font-size:1.1rem;line-height:1.95;margin:0}
+.personal{margin-top:2.5rem}
+.personal summary{display:flex;justify-content:space-between;align-items:center;gap:1rem;list-style:none;border-block:1px solid var(--ink);padding:1rem 0;cursor:pointer;font-weight:600}
+.personal summary::-webkit-details-marker{display:none}
+.hide-label{display:none}
+.personal[open] .show-label{display:none}
+.personal[open] .hide-label{display:inline}
+.indicator{font-size:1.5rem;transition:transform .2s}
+.personal[open] .indicator{transform:rotate(45deg)}
+.personal-copy{padding-top:1.5rem;font-size:1.03rem;line-height:1.95}
+.personal-copy p{margin:0 0 1.25rem}
+.extra-section h2{font:400 clamp(2.5rem,5vw,4rem)/1.1 var(--serif);letter-spacing:-.045em;margin:0 0 2.3rem}
+.project{padding:1.7rem 0;border-top:1px solid currentColor}
+.project:last-child{border-bottom:1px solid currentColor}
+.project h3{font:600 1.25rem/1.35 var(--sans);letter-spacing:-.035em;margin:0 0 .7rem;max-width:32ch}
+.project p{margin:0 0 .85rem;max-width:52ch}
+.project a{font-size:.9rem;font-weight:600}
+.resume>p:first-child{font:italic 1.3rem/1.6 var(--serif);margin:0 0 1.5rem}
+.resume h3{font:600 1rem/1.4 var(--sans);border-top:1px solid currentColor;padding-top:1.3rem;margin:2rem 0 1rem}
+.resume p{margin:0 0 1rem}
+.resume a[href$=".pdf"]{display:inline-block;padding:.7rem 1rem;color:var(--paper);background:var(--ink);text-decoration:none}
+#blog>p{font:italic 1.4rem/1.5 var(--serif);border-top:1px solid currentColor;padding-top:2rem}
+@keyframes enter{from{opacity:0;transform:translateX(.5rem)}to{opacity:1;transform:none}}
+@media(max-width:52rem){
+.about{width:calc(100% - 3rem);grid-template-columns:12rem minmax(0,1fr);gap:2.5rem;padding-top:3rem}
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
-
-  
-    .navigation { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: thin; }
-    .navigation a { white-space: nowrap; padding: .4rem 0; border-bottom: 2px solid transparent; }
-    .navigation a[aria-current="page"] { border-bottom-color: var(--fg); }
-    .js-sections .page-panel[hidden] { display: none; }
-    .js-sections .extra-section { margin-top: clamp(2.5rem,5vw,4.5rem); }
-    </style>
+@media(max-width:38rem){
+.about{width:calc(100% - 2.25rem);display:block;padding-top:1.5rem}
+.heading{position:static;margin-bottom:2.5rem}
+h1{font-size:1.35rem;margin-bottom:1.2rem}
+h1 span{display:inline}
+h1 span:nth-child(2){display:none}
+.navigation{flex-direction:row;overflow:auto;padding:.5rem 0;gap:.15rem}
+.navigation a{white-space:nowrap;font-size:.9rem;padding:.5rem .7rem}
+.label{display:none}
+.theme-toggle{position:absolute;right:0;top:0}
+.heading{position:relative}
+.bio:before,.extra-section h2{font-size:2.8rem;margin-bottom:1.5rem}
+.formal{font-size:1.02rem;line-height:1.85}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
   <main class="about" aria-labelledby="name">
     <header class="heading">
       <div class="heading-tools">
-        <p class="label">RICARDO ANDERSON DONTE</p>
+        <p class="label">Maths, code & a few other interests.</p>
         <button class="theme-toggle" type="button" hidden>Dark mode</button>
       </div>
       <h1 id="name"><span>Ricardo</span> <span>Anderson</span> <span>DONTE</span></h1>
