@@ -211,7 +211,13 @@ a:hover { text-decoration-color: currentColor; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
 
-  </style>
+  
+    .navigation { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: thin; }
+    .navigation a { white-space: nowrap; padding: .4rem 0; border-bottom: 2px solid transparent; }
+    .navigation a[aria-current="page"] { border-bottom-color: var(--fg); }
+    .js-sections .page-panel[hidden] { display: none; }
+    .js-sections .extra-section { margin-top: clamp(2.5rem,5vw,4.5rem); }
+    </style>
 </head>
 <body>
   <main class="about" aria-labelledby="name">
@@ -221,10 +227,10 @@ a:hover { text-decoration-color: currentColor; }
         <button class="theme-toggle" type="button" hidden>Dark mode</button>
       </div>
       <h1 id="name"><span>Ricardo</span> <span>Anderson</span> <span>DONTE</span></h1>
-      <nav class="navigation" aria-label="Main navigation"><a href="#name">About</a><a href="#projects">Projects</a><a href="#cv">CV</a><a href="#blog">Blog</a></nav>
+      <nav class="navigation" aria-label="Main navigation"><a href="#about-panel">About</a><a href="#projects">Projects</a><a href="#cv">CV</a><a href="#blog">Blog</a></nav>
     </header>
 
-    <div class="bio">
+    <div class="bio page-panel" id="about-panel">
       <p class="formal">Hi, my name is Ricardo Anderson DONTE. I’m a graduate in quantitative finance from Mohammed VI Polytechnic University in Morocco. Long before my master’s degree, I did my undergraduate studies in applied statistics at the National School of Statistics, Planning and Demography (ENSPD) in my home country, Benin. Today, I work as a quant analyst consultant at Quanteam, part of the Rainbow Partners Group, and my role basically involves working on research and development with the IT teams of a major player in the French banking sector, whose name I omit here. I have done some pretty good quant finance projects that may interest you. So much for the formal presentation.</p>
 
       <details class="personal">
@@ -244,7 +250,7 @@ a:hover { text-decoration-color: currentColor; }
         </div>
       </details>
     </div>
-    <section class="extra-section" id="projects" aria-labelledby="projects-title">
+    <section class="extra-section page-panel" id="projects" aria-labelledby="projects-title">
       <h2 id="projects-title">Projects</h2>
       <div>
         <article class="project"><h3>Credit Pricing Library and Entropy Calibration</h3><p>Pricing credit default swaps and index tranches, and calibrating portfolio loss distributions.</p><a href="https://github.com/Ricardodonte/Credit-Pricing-Library-and-Entropy-Calibration">View on GitHub</a></article>
@@ -252,8 +258,8 @@ a:hover { text-decoration-color: currentColor; }
         <article class="project"><h3>Portfolio Optimisation Under Transaction Costs</h3><p>Portfolio optimisation with transaction costs.</p><a href="https://github.com/Ricardodonte/Portfolio-Optimisation-Under-Transaction-Costs-">View on GitHub</a></article>
       </div>
     </section>
-    <section class="extra-section" id="cv" aria-labelledby="cv-title"><h2 id="cv-title">CV</h2><div class="resume"><p>For any recruiters passing by, here is my CV. I promise it has fewer equations than my thesis.</p><p><a href="Academic_CV_Ricardo_DONTE.pdf">Download my CV (PDF)</a></p><h3>Research interests</h3><p>Stochastic analysis and mathematical finance, including stochastic control, BSDEs, rough paths, model uncertainty, entropic methods and optimal transport.</p><h3>Education</h3><p><strong>MSc in Financial Engineering</strong><br>Mohammed VI Polytechnic University, Africa Business School · 2024–2026<br>Valedictorian, Very Good</p><p><strong>Bachelor’s Degree in Applied Statistics</strong><br>ENSPD, University of Parakou · 2021–2024</p><h3>Experience</h3><p><strong>Junior Quant Consultant</strong><br>Quant Factory, Quanteam Group · 2026–present</p><p><strong>Master’s Thesis Internship, Quantitative Research</strong><br>Quant Factory · 2026<br>Credit derivatives pricing and entropic calibration.</p><p><strong>Research Assistant</strong><br>Center of Financial Excellence · 2025<br>Commodity markets and NLP tools for document querying.</p><p><strong>Research Assistant</strong><br>Research Laboratory in Population Science and Development · 2024<br>Right-truncated Poisson mixture regression models.</p><h3>Preprint</h3><p>With B. F. Koladjo and E. Sodjinou, <em>A right-truncated Poisson mixture model for analyzing count data</em>, 2025. <a href="https://arxiv.org/abs/2503.07254">Read on arXiv</a></p><h3>Skills and languages</h3><p>C++, Python, R and LaTeX. French and English.</p><p><a href="mailto:ricardodonte99@gmail.com">Contact me by email</a></p></div></section>
-    <section class="extra-section" id="blog" aria-labelledby="blog-title"><h2 id="blog-title">Blog</h2><p>Posts coming soon.</p></section>
+    <section class="extra-section page-panel" id="cv" aria-labelledby="cv-title"><h2 id="cv-title">CV</h2><div class="resume"><p>For any recruiters passing by, here is my CV. I promise it has fewer equations than my thesis.</p><p><a href="Academic_CV_Ricardo_DONTE.pdf">Download my CV (PDF)</a></p><h3>Research interests</h3><p>Stochastic analysis and mathematical finance, including stochastic control, BSDEs, rough paths, model uncertainty, entropic methods and optimal transport.</p><h3>Education</h3><p><strong>MSc in Financial Engineering</strong><br>Mohammed VI Polytechnic University, Africa Business School · 2024–2026<br>Valedictorian, Very Good</p><p><strong>Bachelor’s Degree in Applied Statistics</strong><br>ENSPD, University of Parakou · 2021–2024</p><h3>Experience</h3><p><strong>Junior Quant Consultant</strong><br>Quant Factory, Quanteam Group · 2026–present</p><p><strong>Master’s Thesis Internship, Quantitative Research</strong><br>Quant Factory · 2026<br>Credit derivatives pricing and entropic calibration.</p><p><strong>Research Assistant</strong><br>Center of Financial Excellence · 2025<br>Commodity markets and NLP tools for document querying.</p><p><strong>Research Assistant</strong><br>Research Laboratory in Population Science and Development · 2024<br>Right-truncated Poisson mixture regression models.</p><h3>Preprint</h3><p>With B. F. Koladjo and E. Sodjinou, <em>A right-truncated Poisson mixture model for analyzing count data</em>, 2025. <a href="https://arxiv.org/abs/2503.07254">Read on arXiv</a></p><h3>Skills and languages</h3><p>C++, Python, R and LaTeX. French and English.</p><p><a href="mailto:ricardodonte99@gmail.com">Contact me by email</a></p></div></section>
+    <section class="extra-section page-panel" id="blog" aria-labelledby="blog-title"><h2 id="blog-title">Blog</h2><p>Posts coming soon.</p></section>
   </main>
   <script>
     const root = document.documentElement;
@@ -282,6 +288,19 @@ a:hover { text-decoration-color: currentColor; }
     systemTheme.addEventListener("change", updateThemeButton);
     updateThemeButton();
     button.hidden = false;
+    const sectionLinks = Array.from(document.querySelectorAll(".navigation a"));
+    const panels = Array.from(document.querySelectorAll(".page-panel"));
+    function showSection() {
+      const target = sectionLinks.some(link => link.hash === location.hash) ? location.hash : "#about-panel";
+      for (const panel of panels) panel.hidden = "#" + panel.id !== target;
+      for (const link of sectionLinks) {
+        if (link.hash === target) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      }
+    }
+    document.documentElement.classList.add("js-sections");
+    window.addEventListener("hashchange", showSection);
+    showSection();
   </script>
 </body>
 </html>
