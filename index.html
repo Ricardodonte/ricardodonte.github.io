@@ -104,6 +104,14 @@ body { isolation:isolate; }
 .upcoming-post p:last-child { margin:0; }
 .navigation a { color:var(--ink); }
 .navigation a[aria-current="page"] { color:var(--paper); }
+
+.equation-backdrop span { animation: equation-drift 32s ease-in-out infinite alternate; transition:opacity 1.2s ease; }
+.equation-backdrop span:nth-child(2) { animation-duration:39s; animation-delay:-12s; }
+.equation-backdrop span:nth-child(3) { animation-duration:45s; animation-delay:-20s; }
+.equation-backdrop span.fading { opacity:0; }
+body.background-paused .equation-backdrop span { animation-play-state:paused; }
+@keyframes equation-drift { from { translate:-1.5rem -.7rem; } to { translate:2rem 1.2rem; } }
+@media(prefers-reduced-motion:reduce) { .equation-backdrop span { animation:none; transition:none; } }
 </style>
 </head>
 <body>
@@ -199,6 +207,51 @@ body { isolation:isolate; }
     document.documentElement.classList.add("js-sections");
     window.addEventListener("hashchange", showSection);
     showSection();
+
+    const equationSlots = Array.from(document.querySelectorAll(".equation-backdrop span"));
+    const equationPool = [
+      "∂ₜu = ½σ² ∂ₓₓu + b ∂ₓu",
+      "dXₜ = b(Xₜ) dt + σ(Xₜ) dWₜ",
+      "∂ₜp = −∂ₓ(bp) + ½∂ₓₓ(σ²p)",
+      "∂ₜu = ½ ∂ₓₓu",
+      "dXₜ = −θXₜ dt + σ dWₜ",
+      "dXₜ = μXₜ dt + σXₜ dWₜ",
+      "dXₜ = κ(θ − Xₜ) dt + σ√Xₜ dWₜ"
+    ];
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let equationTimer;
+    let fadeTimer;
+    let nextSlot = 0;
+    let nextEquation = 3;
+
+    function rotateEquation() {
+      const slot = equationSlots[nextSlot];
+      const currentEquations = equationSlots.map(element => element.textContent.trim());
+      while (currentEquations.includes(equationPool[nextEquation])) {
+        nextEquation = (nextEquation + 1) % equationPool.length;
+      }
+      const replacement = equationPool[nextEquation];
+      nextEquation = (nextEquation + 1) % equationPool.length;
+      nextSlot = (nextSlot + 1) % equationSlots.length;
+      slot.classList.add("fading");
+      fadeTimer = window.setTimeout(() => {
+        slot.textContent = replacement;
+        slot.classList.remove("fading");
+      }, 1200);
+    }
+
+    function updateBackgroundAnimation() {
+      window.clearInterval(equationTimer);
+      window.clearTimeout(fadeTimer);
+      equationSlots.forEach(slot => slot.classList.remove("fading"));
+      document.body.classList.toggle("background-paused", document.hidden);
+      if (!document.hidden && !reducedMotion.matches) {
+        equationTimer = window.setInterval(rotateEquation, 9000);
+      }
+    }
+    document.addEventListener("visibilitychange", updateBackgroundAnimation);
+    reducedMotion.addEventListener("change", updateBackgroundAnimation);
+    updateBackgroundAnimation();
   </script>
 </body>
 </html>
