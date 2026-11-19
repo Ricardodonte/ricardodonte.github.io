@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="About Ricardo Anderson Donte, a quantitative finance graduate and quant analyst consultant.">
+  <title>About me · Ricardo Anderson DONTE</title>
+  <script>
+    try {
+      const savedTheme = localStorage.getItem("ricardo-theme");
+      if (savedTheme === "dark" || savedTheme === "light") {
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    } catch {
+      // The theme still works when browser storage is unavailable.
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #fff;
+      --ink: #000;
+      --sans: 'Segoe UI', system-ui, sans-serif;
+      --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        color-scheme: dark;
+        --paper: #000;
+        --ink: #fff;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --paper: #000;
+      --ink: #fff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 1rem/1.72 var(--sans);
+      transition: color .2s ease, background-color .2s ease;
+    }
+
+    .about {
+      width: min(68rem, calc(100% - 5rem));
+      margin-inline: auto;
+      padding-block: clamp(2rem, 7vw, 6rem) clamp(3rem, 8vw, 7rem);
+    }
+
+    .heading { border-block-end: 1px solid var(--ink); padding-block-end: clamp(1.6rem, 4vw, 3.2rem); }
+    .heading-tools {
+      min-height: 3rem;
+      margin-block-end: clamp(1.9rem, 5vw, 4rem);
+      padding-block-end: .85rem;
+      border-block-end: 1px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .label { margin: 0; font-size: .95rem; font-weight: 650; }
+    h1 {
+      margin: 0;
+      font: 400 clamp(2.8rem, 8.7vw, 7.4rem)/.98 var(--serif);
+      letter-spacing: -.058em;
+    }
+    h1 span { display: inline-block; }
+    .theme-toggle {
+      min-height: 2.75rem;
+      padding: .42rem .85rem;
+      border: 1px solid var(--ink);
+      border-radius: 1.5rem;
+      color: var(--ink);
+      background: var(--paper);
+      font: 600 .9rem/1.2 var(--sans);
+      cursor: pointer;
+      transition: color .2s ease, background-color .2s ease;
+    }
+    .theme-toggle:hover { color: var(--paper); background: var(--ink); }
+    :where(button, summary):focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+
+    .bio {
+      max-width: 64ch;
+      margin: clamp(1.7rem, 4vw, 3rem) 0 0 auto;
+      font-size: clamp(1.05rem, 1.5vw, 1.15rem);
+    }
+    .bio p { margin: 0; }
+    .formal::first-letter { font-weight: 700; }
+    .personal { margin-block-start: clamp(1.75rem, 4vw, 2.75rem); }
+    .personal summary {
+      min-height: 3.3rem;
+      border-block: 1px solid var(--ink);
+      padding: .75rem .35rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+      font-weight: 650;
+      cursor: pointer;
+    }
+    .personal summary::-webkit-details-marker { display: none; }
+    .personal summary:hover .summary-text { text-decoration: underline; text-underline-offset: .22em; }
+    .hide-label { display: none; }
+    .personal[open] .show-label { display: none; }
+    .personal[open] .hide-label { display: inline; }
+    .indicator {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: 1.45rem;
+      line-height: 1;
+      transition: transform .2s ease;
+    }
+    .personal[open] .indicator { transform: rotate(45deg); }
+    .personal-copy { padding-block-start: 1.4rem; }
+    .personal-copy p + p { margin-block-start: 1.15rem; }
+    .personal[open] .personal-copy { animation: appear .25s ease-out; }
+
+    .navigation { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; margin: 1.5rem 0 0; }
+    a { color: var(--ink); text-underline-offset: .25em; }
+    a:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+    .extra-section { border-top: 1px solid var(--ink); margin-top: clamp(4rem, 8vw, 7rem); padding-top: 2rem; display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; }
+    .extra-section h2 { margin: 0; font: 400 clamp(2.6rem, 5vw, 4.2rem)/1 var(--serif); letter-spacing: -.05em; }
+    .extra-section p { margin: 0; }
+    .project { padding: 1.2rem 0; border-bottom: 1px solid var(--ink); }
+    .project:first-child { padding-top: 0; }
+    .project h3 { margin: 0 0 .35rem; font: 400 1.45rem/1.2 var(--serif); }
+    .project p { margin-bottom: .5rem; }
+    @media (max-width: 42rem) { .extra-section { grid-template-columns: 1fr; } }
+    .resume h3 { font: 400 1.5rem/1.2 var(--serif); margin: 1.7rem 0 .65rem; }
+    .resume p + p { margin-top: 1rem; }
+    .resume a { text-underline-offset: .25em; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(.35rem); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 42rem) {
+      .about { width: calc(100% - 2.25rem); }
+      .bio { margin-inline-start: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body, .theme-toggle, .indicator { transition: none; }
+      .personal[open] .personal-copy { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="about" aria-labelledby="name">
+    <header class="heading">
+      <div class="heading-tools">
+        <p class="label">About me</p>
+        <button class="theme-toggle" type="button" hidden>Dark mode</button>
+      </div>
+      <h1 id="name"><span>Ricardo</span> <span>Anderson</span> <span>DONTE</span></h1>
+    </header>
+
+    <div class="bio">
+      <p class="formal">Hi, my name is Ricardo Anderson DONTE. I’m a graduate in quantitative finance from Mohammed VI Polytechnic University in Morocco. Long before my master’s degree, I did my undergraduate studies in applied statistics at the National School of Statistics, Planning and Demography (ENSPD) in my home country, Benin. Today, I work as a quant analyst consultant at Quanteam, part of the Rainbow Partners Group, and my role basically involves working on research and development with the IT teams of a major player in the French banking sector, whose name I omit here. I have done some pretty good quant finance projects that may interest you. So much for the formal presentation.</p>
+
+      <details class="personal">
+        <summary>
+          <span class="summary-text">
+            <span class="show-label">Show personal introduction</span>
+            <span class="hide-label">Hide personal introduction</span>
+          </span>
+          <span class="indicator" aria-hidden="true">+</span>
+        </summary>
+        <div class="personal-copy">
+          <p>Beyond this formal introduction, I’m a geek, passionate about science, and especially the exact sciences, as well as video games, anime and manga. I discovered video games at a very early age, and I still play a lot: less than I used to do, perhaps, but enough to remain well above the average gaming hours of people my age. Manga, especially seinen, has consumed countless hours of my time, and my favorite pastime is memorizing opening themes and doing blind tests. The Evangelion one is my personal favorite, I might add.</p>
+          <p>When I say exact sciences, I first think of mathematics and then physics, of which I have limited knowledge but am still interested in learning more. I love maths, even though I am only interested in a few specific areas of it, notably stochastic analysis and its applications in mathematical finance. That said, I occasionally read about more abstract mathematics, especially topology and some theoretical number theory. I enjoy working with abstraction (I guess that’s why I love reading very abstract C++ code, but that’s another story), and I am convinced that it’s that abstraction that gives mathematics its beauty. And when I say I love mathematics, I mean that I would rather learn something new in math, or grind through some textbook exercises, than scroll through TikTok and social media. Mathematics for me is a way to escape, to let time drift by, and to give my brain a workout. I don’t pretend to be very good at math, far from it: there is still an immense, almost “infinite” amount for me to master, even in my field of interest. But it is a constant joy to learn new maths, especially ones I don’t know yet, and to discuss them with people who have mastered the subject. If you are one of those masters, please do not hesitate to get in touch. I’m not very active on social media, and I don’t really have any desire to be: it’s simply not how I communicate. The easiest way to reach me is by email, or maybe WhatsApp.</p>
+          <p>It’s a little bit paradoxical, but you will notice that my projects and my background are not very closely linked to stochastic analysis: I discovered my interest in this topic late. I hope to remedy this very soon through other related projects, and to make the subject as accessible as I can by providing better explanations and, above all, a visual approach to abstract concepts.</p>
+          <p>Beyond mathematics, I am very interested in philosophy, particularly that which explores existentialism. I have started reading a lot of Kafka, Hesse, Dostoevsky and Camus, my favorite. I love discussing the meaning of life, religion and freedom. I am also interested in social issues, particularly inequality, and I remain open to discussion.</p>
+          <p>My long-term goal is to teach stochastic analysis at a university, any university, provided that I can live “well” there, and to contribute to the field through research. And by “well”, I mean a modest life: I have a very healthy relationship with money and wealth. So, that’s a little overview of who I am. I hope to help you discover a few things through my future projects and blog posts, and perhaps even make a small impact. Math is so cool.</p>
+        </div>
+      </details>
+    </div>
+    <section class="extra-section" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+      <div>
+        <article class="project"><h3>Credit Pricing Library and Entropy Calibration</h3><p>Pricing credit default swaps and index tranches, and calibrating portfolio loss distributions.</p><a href="https://github.com/Ricardodonte/Credit-Pricing-Library-and-Entropy-Calibration">View on GitHub</a></article>
+        <article class="project"><h3>Vine Copula Asset Dependence Modeling</h3><p>Modeling dependence between asset returns with vine copulas.</p><a href="https://github.com/Ricardodonte/Vine-Copula-Asset-Dependance-Modeling">View on GitHub</a></article>
+        <article class="project"><h3>Portfolio Optimisation Under Transaction Costs</h3><p>Portfolio optimisation with transaction costs.</p><a href="https://github.com/Ricardodonte/Portfolio-Optimisation-Under-Transaction-Costs-">View on GitHub</a></article>
+      </div>
+    </section>
+    <section class="extra-section" id="cv" aria-labelledby="cv-title"><h2 id="cv-title">CV</h2><div class="resume"><p>For any recruiters passing by, here is my CV. I promise it has fewer equations than my thesis.</p><h3>Research interests</h3><p>Stochastic analysis and mathematical finance, including stochastic control, BSDEs, rough paths, model uncertainty, entropic methods and optimal transport.</p><h3>Education</h3><p><strong>MSc in Financial Engineering</strong><br>Mohammed VI Polytechnic University, Africa Business School · 2024–2026<br>Valedictorian, Very Good</p><p><strong>Bachelor’s Degree in Applied Statistics</strong><br>ENSPD, University of Parakou · 2021–2024</p><h3>Experience</h3><p><strong>Junior Quant Consultant</strong><br>Quant Factory, Quanteam Group · 2026–present</p><p><strong>Master’s Thesis Internship, Quantitative Research</strong><br>Quant Factory · 2026<br>Credit derivatives pricing and entropic calibration.</p><p><strong>Research Assistant</strong><br>Center of Financial Excellence · 2025<br>Commodity markets and NLP tools for document querying.</p><p><strong>Research Assistant</strong><br>Research Laboratory in Population Science and Development · 2024<br>Right-truncated Poisson mixture regression models.</p><h3>Preprint</h3><p>With B. F. Koladjo and E. Sodjinou, <em>A right-truncated Poisson mixture model for analyzing count data</em>, 2025. <a href="https://arxiv.org/abs/2503.07254">Read on arXiv</a></p><h3>Skills and languages</h3><p>C++, Python, R and LaTeX. French and English.</p><p><a href="mailto:ricardodonte99@gmail.com">Contact me by email</a></p></div></section>
+    <section class="extra-section" id="blog" aria-labelledby="blog-title"><h2 id="blog-title">Blog</h2><p>Posts coming soon.</p></section>
+  </main>
+  <script>
+    const root = document.documentElement;
+    const button = document.querySelector(".theme-toggle");
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    function isDark() {
+      return root.dataset.theme ? root.dataset.theme === "dark" : systemTheme.matches;
+    }
+
+    function updateThemeButton() {
+      button.textContent = isDark() ? "Light mode" : "Dark mode";
+    }
+
+    button.addEventListener("click", () => {
+      const theme = isDark() ? "light" : "dark";
+      root.dataset.theme = theme;
+      try {
+        localStorage.setItem("ricardo-theme", theme);
+      } catch {
+        // Keep the selected theme for this visit.
+      }
+      updateThemeButton();
+    });
+
+    systemTheme.addEventListener("change", updateThemeButton);
+    updateThemeButton();
+    button.hidden = false;
+  </script>
+</body>
+</html>
